@@ -22,14 +22,14 @@ const Header = () => {
               <IconButton
                 size="large"
                 edge="start"
-                color="inherit"
+                color="secondary"
                 aria-label="menu"
                 sx={{ mr: 2 }}
               >
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" component="div" className={classes.title}>
-                News
+                Meu App
               </Typography>
               <Button color="inherit">Login</Button>
             </Toolbar>
