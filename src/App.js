@@ -5,19 +5,20 @@ import {
 } from 'react-router-dom'
 
 import Home from './pages/Home'
+import TemplateDefault from './templates/Default'
 
 function App() {
   return (
-    <>
 
+    <TemplateDefault>
       <Router>
         <Routes>
 
           <Route path='/' element={<Home />}></Route>
         </Routes>
       </Router>
-
-    </>
+    </TemplateDefault>
+    
   )
 }
 
