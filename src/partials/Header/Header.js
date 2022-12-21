@@ -9,7 +9,6 @@ import MenuIcon from '@mui/icons-material/Menu'
 import {
   Drawer,
   List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText

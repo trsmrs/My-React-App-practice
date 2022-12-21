@@ -1,12 +1,18 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import axios from 'axios'
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Button } from "@mui/material";
-import { textAlign } from "@mui/system";
 
-import img from '../customers.jpg'
+import { teal } from "@mui/material/colors";
+import {
+    Button,
+    Snackbar,
+    Stack,
+} from "@mui/material";
+import MuiAlert from '@mui/material/Alert';
+
+
 
 const CustomersAdd = () => {
     const [form, setForm] = useState({
@@ -28,7 +34,21 @@ const CustomersAdd = () => {
     })
 
 
+    const [open, setOpen] = useState(false);
+    const handleClick = () => {
+        setOpen(true);
+        clearFields()
 
+    }
+
+
+    const handleClose = (event, reason) => {
+        if (reason === 'click') {
+            return;
+        }
+
+        setOpen(false);
+    }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -43,7 +63,6 @@ const CustomersAdd = () => {
         })
     }
 
-
     const handleAddButton = () => {
         let hasError = false
         let newFormState = {
@@ -54,28 +73,45 @@ const CustomersAdd = () => {
             newFormState.name = {
                 value: form.name.value,
                 error: true,
-                helperText : "Digite o seu Nome"
+                helperText: "Digite o seu Nome"
             }
         }
         if (!form.email.value) {
             newFormState.email = {
                 value: form.email.value,
                 error: true,
-                helperText : "Digite o seu E-mail"
+                helperText: "Digite o seu E-mail"
             }
         }
         if (!form.job.value) {
-           hasError = true
+            hasError = true
             newFormState.job = {
                 value: form.job.value,
                 error: true,
-                helperText : "Digite o seu Cargo"
+                helperText: "Digite a sua Profissão"
             }
         }
         if (hasError) {
 
-            setForm(newFormState)
+            return setForm(newFormState)
         }
+
+        axios.post('https://reqres.in/api/users', {
+            name: form.name.value,
+            email: form.email.value,
+            job: form.job.value,
+        }).then((response) => {
+            handleClick()
+        })
+
+
+
+    }
+
+    const clearFields = () => {
+        form.name.value = ""
+        form.email.value = ""
+        form.job.value = ""
     }
 
 
@@ -84,7 +120,7 @@ const CustomersAdd = () => {
             <Box
                 component="form"
                 sx={{
-                    '& > :not(style)': { m: 2, width: '30ch' },
+                    '& > :not(style)': { m: 2, width: '400px', marginLeft: "15%" },
                 }}
                 noValidate
                 autoComplete="off"
@@ -96,7 +132,7 @@ const CustomersAdd = () => {
                         name="name"
                         variant="standard"
                         value={form.name.value}
-                        helperText= {form.name.error ? form.name.helperText : ''}
+                        helperText={form.name.error ? form.name.helperText : ''}
                         onChange={handleInputChange} />
                 </div>
                 <div>
@@ -106,28 +142,45 @@ const CustomersAdd = () => {
                         name="email"
                         variant="standard"
                         value={form.email.value}
-                        helperText= {form.email.error ? form.email.helperText : ''}
+                        helperText={form.email.error ? form.email.helperText : ''}
                         onChange={handleInputChange} />
                 </div>
                 <div>
                     <TextField
                         error={form.job.error}
-                        label="Cargo"
+                        label="Profissão"
                         name="job"
                         variant="standard"
                         value={form.job.value}
-                        helperText= {form.job.error ? form.job.helperText: ''}
+                        helperText={form.job.error ? form.job.helperText : ''}
                         onChange={handleInputChange} />
                 </div>
                 <div>
+                   <Box> 
                     <Button sx={{ margin: 2, padding: ["5px 10px 0px 10px"] }}
                         variant="contained"
                         color='primary'
                         onClick={() => handleAddButton()}>
                         Cadastrar
+                    
                     </Button>
+                    </Box>
                 </div>
             </Box>
+
+
+            <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+                    <MuiAlert onClose={handleClose} severity="success" sx={{
+                        width: '100%',
+                        color: teal['900'],
+                        backgroundColor: teal['A400']
+                    }}>
+                        Cadastro Realizado com Sucesso!
+                    </MuiAlert>
+                </Snackbar>
+            </Stack>
+
         </>
     )
 }

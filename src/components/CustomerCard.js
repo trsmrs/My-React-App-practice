@@ -3,6 +3,9 @@ import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 
 import {
+  
+  Snackbar,
+  Stack,
   CardContent,
   CardActions,
   Avatar,
@@ -10,12 +13,14 @@ import {
   Typography,
 } from '@mui/material/'
 
+import MuiAlert from '@mui/material/Alert';
+
 import { teal } from '@mui/material/colors'
 import DeleteIcon from '@mui/icons-material/DeleteForever'
 import EditIcon from '@mui/icons-material/Edit'
 
 import ModalConfirm from './ModalConfirm'
-import useStyles from '../partials/Header/Header.style'
+
 
 const CustomerCard = ({
   id,
@@ -28,8 +33,6 @@ const CustomerCard = ({
 
 }) => {
 
-  const classes = useStyles()
-
   const [openModal, setOpenModal] = useState(false)
 
   const handleToggleOpenModal = () => {
@@ -39,11 +42,27 @@ const CustomerCard = ({
   const handleConfirmModal = () => {
     onRemoveCustomer(id)
     handleToggleOpenModal()
+    handleClick()
   }
 
   const handleRemoveCustomer = () => {
     handleToggleOpenModal()
   }
+
+  const [open, setOpen] = useState(false);
+  
+  const handleClick = () => {
+      setOpen(true);
+  };
+
+
+  const handleClose = (event, reason) => {
+      if (reason === 'click') {
+          return;
+      }
+
+      setOpen(false);
+  };
 
 
   return (
@@ -78,11 +97,23 @@ const CustomerCard = ({
       <ModalConfirm
         open={openModal}
         onClose={handleToggleOpenModal}
-        onConfirm={()=> handleConfirmModal(id)}
+        onConfirm={() => handleConfirmModal(id)}
         title="Excluir cadastro."
         msg="Deseja realmente excluir este usuário?"
       />
+   <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <MuiAlert onClose={handleClose} severity="info" sx={{
+                        width: '100%',
+                        color: teal['900'],
+                        backgroundColor: teal['A400']
+                    }}>
+                        Registro excluído com Sucesso!
+                    </MuiAlert>
+                </Snackbar>
+            </Stack>
     </>
+
   )
 }
 
