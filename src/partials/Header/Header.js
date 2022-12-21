@@ -20,6 +20,7 @@ import { useNavigate } from 'react-router-dom'
 
 import HomeIcon from '@mui/icons-material/Home';
 import PersonAdd from '@mui/icons-material/PersonAdd';
+import Person from '@mui/icons-material/Person';
 import useStyles from './Header.style'
 
 
@@ -37,6 +38,7 @@ const Header = () => {
 
   const handleNavigate = route => {
     navigate(route)
+    handleToggleMenu()
   }
 
   return (
@@ -76,6 +78,11 @@ const Header = () => {
           </ListItemButton>
 
           <ListItemButton onClick={() => handleNavigate('customers')}>
+            <ListItemIcon><Person /></ListItemIcon>
+            <ListItemText>Lista de Clientes</ListItemText>
+          </ListItemButton>
+
+          <ListItemButton onClick={() => handleNavigate('customers/add')}>
             <ListItemIcon><PersonAdd /></ListItemIcon>
             <ListItemText>Cadastro de Clientes</ListItemText>
           </ListItemButton>

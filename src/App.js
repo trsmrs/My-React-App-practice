@@ -9,6 +9,7 @@ import Page from './templates/Page'
 
 import Home from './pages/Home'
 import Customers from './pages/Customers'
+import CustomersAdd from './pages/CustomersAdd'
 
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
         <TemplateDefault>
         <Routes>
           
-          <Route path='/customers' element={Page('Clientes', Customers)}></Route>  
+          <Route path='/customers' element={Page('Clientes', Customers)}></Route>
+          <Route path='/customers/add' element={Page('Cadastro de Clientes', CustomersAdd)}></Route>          
           <Route path='/' element={Page('Home', Home)}></Route>  
           
           
