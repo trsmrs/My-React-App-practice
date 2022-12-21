@@ -19,11 +19,12 @@ function App() {
     <TemplateDefault>
       <Router>
         <Routes>
-          <Route path='/customers' element={Page('Clientes',<Customers />)}>
-            
-          </Route>
           
-          <Route path='/' element={<Home />}></Route>
+          <Route path='/customers' element={Page('Clientes', Customers)}></Route>  
+          <Route path='/' element={Page('Home', Home)}></Route>  
+          
+          
+          
         </Routes>
       </Router>
     </TemplateDefault>

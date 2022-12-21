@@ -14,7 +14,7 @@ const Page = ( title, Component ) => {
     const classes = useStyles()
     return (
         <div>
-           <Typography variant='h1' component='h2'>
+           <Typography variant='h5' component='h2'>
                 {title}
             </Typography> 
             <Component />

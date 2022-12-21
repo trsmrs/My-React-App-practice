@@ -4,46 +4,32 @@ import axios from 'axios'
 import Grid from '@mui/material/Unstable_Grid2';
 
 import CustomersCard from "../components/CustomerCard"
-import { Typography } from "@mui/material";
 
 
 const Customers = () => {
-   
     const [customers, setCustomers] = useState([])
-    
 
     useEffect(() => {
         axios.get('https://reqres.in/api/users')
             .then(response => {
                 const { data } = response.data
                 setCustomers(data)
-
             })
     }, [])
 
-
-
     return (
+
         <>
-            <Typography variant='h4' component="h2">
-               Clientes
-            </Typography> 
-            
             <Grid container
-            spacing={{ xs: 5, md: 4 }}
-            columns={{ xs: 2, sm: 4, md: 6 }}
-            margin= '10px'
-            display='flex'
-            justifyContent="center"
-            alignItems='center'
-            
-            >
+                spacing={{ xs: 5, md: 4 }}
+                columns={{ xs: 2, sm: 4, md: 6 }}
+                margin='10px'
+                display='flex'
+                justifyContent="center"
+                alignItems='center'>
 
                 {
-
                     customers.map(item => (
-
-
                         <Grid xs={2}>
                             <CustomersCard
                                 name={item.first_name}
@@ -51,7 +37,6 @@ const Customers = () => {
                                 email={item.email}
                                 avatar={item.avatar}
                             />
-
                         </Grid>
                     ))
                 }
