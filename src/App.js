@@ -16,8 +16,8 @@ function App() {
    
   
 
-    <TemplateDefault>
-      <Router>
+    <Router>
+        <TemplateDefault>
         <Routes>
           
           <Route path='/customers' element={Page('Clientes', Customers)}></Route>  
@@ -26,8 +26,8 @@ function App() {
           
           
         </Routes>
-      </Router>
     </TemplateDefault>
+      </Router>
     
   )
 }

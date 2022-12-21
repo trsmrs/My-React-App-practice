@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { styled } from '@mui/material/styles'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 
@@ -11,11 +10,11 @@ import {CardContent,
 } from '@mui/material/'
 
 
-import { deepOrange, red } from '@mui/material/colors'
+import { teal } from '@mui/material/colors'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
 
-import  ClassNames from 'classnames'
+
 
 const CustomerCard = ({
   name,
@@ -30,10 +29,10 @@ const CustomerCard = ({
   return (
 
     
-      <Card sx={{ maxWidth: 345}} className={className} >
+      <Card sx={{ maxWidth: 345, backgroundColor: teal['A200']}} className={className} >
         <CardHeader
           avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={avatar}>
+            <Avatar aria-label="recipe" src={avatar}>
 
             </Avatar>
           }

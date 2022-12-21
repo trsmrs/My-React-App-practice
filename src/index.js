@@ -4,16 +4,16 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import App from './App';
 import './index.css'
-import { green,  } from '@mui/material/colors';
+import { teal,  } from '@mui/material/colors';
 
 
 const theme = createTheme({
   palette: {
     primary:{
-      main: green['400'],
+      main: teal['A400'],
     },
     secondary: {
-      main: green[50]
+      main: teal[50]
     }
   },
 })
