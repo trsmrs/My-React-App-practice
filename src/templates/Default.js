@@ -1,28 +1,24 @@
-import {Container} from '@mui/material'
+import { Container } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 
 import Header from "../partials/Header/Header"
 
 
-import { makeStyles } from '@mui/styles'
-import { blue } from '@mui/material/colors'
-
-
-const useStyles = makeStyles(()=>({
+const useStyles = makeStyles(() => ({
     container: {
         padding: '10px  0',
-        
+
     }
 }))
 
-
-const Default = ({children}) => {
+const Default = ({ children }) => {
     const classes = useStyles()
-    return(
+    return (
         <>
-        <Header />
-        <Container className={classes.container}>
-        {children}
-        </Container>
+            <Header />
+            <Container className={classes.container}>
+                {children}
+            </Container>
         </>
     )
 }

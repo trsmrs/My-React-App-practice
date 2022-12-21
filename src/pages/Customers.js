@@ -4,6 +4,7 @@ import axios from 'axios'
 import Grid from '@mui/material/Unstable_Grid2';
 
 import CustomersCard from "../components/CustomerCard"
+import { Typography } from "@mui/material";
 
 
 const Customers = () => {
@@ -24,8 +25,10 @@ const Customers = () => {
 
     return (
         <>
-            <h1>Customers</h1>
-
+            <Typography variant='h4' component="h2">
+               Clientes
+            </Typography> 
+            
             <Grid container
             spacing={{ xs: 5, md: 4 }}
             columns={{ xs: 2, sm: 4, md: 6 }}
