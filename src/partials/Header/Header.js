@@ -25,7 +25,7 @@ import useStyles from './Header.style'
 
 
 
-const Header = () => {
+const Header = ({user}) => {
 
   const classes = useStyles()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -38,6 +38,10 @@ const Header = () => {
   const handleNavigate = route => {
     navigate(route)
     handleToggleMenu()
+  }
+
+  const handleLogin = login => {
+    navigate(login)
   }
 
   return (
@@ -56,9 +60,13 @@ const Header = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" className={classes.title}>
-            Meu App
+            Meus Clientes
           </Typography>
-          <Button color="inherit">Login</Button>
+          {
+            user.logged 
+            ? <Typography variant='h6'>{user.email}</Typography>
+             :<Button onClick={()=> handleLogin('/login')} color="inherit">Login</Button>
+          }
         </Toolbar>
       </AppBar>
       <Drawer PaperProps={{
