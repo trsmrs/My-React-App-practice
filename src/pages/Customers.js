@@ -1,39 +1,35 @@
 import { useState, useEffect } from "react"
 import axios from 'axios'
-import { Button } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 
 import CustomersCard from "../components/CustomerCard"
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 
 
 const Customers = () => {
+    const [customers, setCustomers] = useState([])
 //    aqui usa o navigate para navegar entre as paginas
     let navigate = useNavigate()
-    // aqui pega o parametro id da url..
-    let {id} = useParams() 
-
-    console.log(id) 
+   
       
-    const [customers, setCustomers] = useState([])
 
 
     useEffect(() => {
         axios.get('https://reqres.in/api/users')
-            .then(response => {
-                const { data } = response.data
-               
+        .then(response => {
+            const { data } = response.data
                 setCustomers(data)
+               
             })
     }, [])
 
     //  aqui era pra retornar na url a página de editar junto com o id passado
-    const handleEditCustomer = id =>{
+    const handleEditCustomer = (id) =>{
         navigate(`/customers/edit/${id}`)
         
     }
 
-    const handleRemoveCustomer = id =>{
+    const handleRemoveCustomer = (id) =>{
         axios.delete(`https://reqres.in/api/users/${id}`)
         .then(() => {
           const newCustomersState = customers.filter(customer => customer.id !==id)
@@ -63,12 +59,13 @@ const Customers = () => {
                                 email={item.email}
                                 avatar={item.avatar}
                                 onRemoveCustomer ={handleRemoveCustomer}
-                                onEditCustomer ={()=> handleEditCustomer(id)}
+                                onEditCustomer ={handleEditCustomer}
                             />
                         </Grid>
                     ))
                 }
             </Grid>
+            
         </>
     )
 }

@@ -26,7 +26,7 @@ function App() {
           
           <Route path='/customers' element={Page('Clientes', Customers)}></Route>
           <Route path='/customers/add' element={Page('Cadastro de Clientes', CustomersAdd)}></Route>        
-          <Route path='/customers/edit:id' element={Page('Editar Clientes', CustomersEdit)}></Route>        
+          <Route path='/customers/edit/:id' element={Page('Editar Clientes', CustomersEdit)}></Route>        
           <Route path='/' element={Page('Home', Home)}></Route>  
           
           

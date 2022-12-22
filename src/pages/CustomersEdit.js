@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from 'axios'
 
 import Box from '@mui/material/Box';
@@ -16,14 +16,9 @@ import { useParams } from "react-router-dom";
 
 
 const CustomersEdit = () => {
-
-    let { id } = useParams() 
-
-    console.log(id) 
-
+    const {id} = useParams()
+ 
     const [form, setForm] = useState({
-     
-
         name: {
             value: '',
             error: false,
@@ -36,10 +31,30 @@ const CustomersEdit = () => {
             value: '',
             error: false,
         },
-
-
     })
-
+    
+    useEffect(()=>{
+        axios.get(`https://reqres.in/api/users/${id}`)
+        .then(response =>{
+            const {data} = response.data
+           
+            setForm({
+                name:{
+                    value: data.first_name,
+                    error: false,
+                },
+                email:{
+                    value: data.email,
+                    error: false,
+                },
+                job:{
+                    value: data.job,
+                    error: false,
+                },
+            })
+            
+        })
+    },[id])
 
     const [open, setOpen] = useState(false);
     const handleClick = () => {
@@ -47,7 +62,6 @@ const CustomersEdit = () => {
         clearFields()
 
     }
-
 
     const handleClose = (event, reason) => {
         if (reason === 'click') {
@@ -103,15 +117,13 @@ const CustomersEdit = () => {
             return setForm(newFormState)
         }
 
-        axios.post('https://reqres.in/api/users', {
+        axios.put(`https://reqres.in/api/users/${id}`, {
             name: form.name.value,
             email: form.email.value,
             job: form.job.value,
         }).then((response) => {
             handleClick()
         })
-
-
 
     }
 
@@ -120,7 +132,6 @@ const CustomersEdit = () => {
         form.email.value = ""
         form.job.value = ""
     }
-
 
     return (
         <>
